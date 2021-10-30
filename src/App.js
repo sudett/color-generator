@@ -1,15 +1,18 @@
 import React from "react";
 
-import Form from "./components/form/form.component";
-import "./App.css";
+import Values from "values.js";
+
+import Header from "./components/header/header.component";
 import ColorContainr from "./components/color-container/color-container.component";
+
+import "./App.css";
 
 export default class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      color: "f15025",
+      color: "",
       error: false,
       colorsList: [],
     };
@@ -17,33 +20,35 @@ export default class App extends React.Component {
 
   submitHandler = (e) => {
     e.preventDefault();
-    this.setState({ color: e.target.querySelector("input").value }, () =>
-      console.log(this.state.color)
-    );
+
+    try {
+      const colorsList = new Values(this.state.color).all(10);
+      this.setState({ colorsList }, () => console.log(this.state.colorsList));
+    } catch (err) {
+      this.setState({ error: true });
+      console.log(err);
+    }
   };
 
   changeHandler = (e) => {
     this.setState({ color: e.target.value });
   };
 
+  componentDidMount() {
+    const color = new Values("#8f5d90");
+    this.setState({ colorsList: color.all(10) });
+  }
+
   render() {
     return (
       <div>
-        <header className="header">
-          <h1 className="heading-primary">Color generator</h1>
-          <Form
-            submitHandler={this.submitHandler}
-            color={this.state.color}
-            changeHandler={this.changeHandler}
-          />
-          <p className={`${this.state.error ? "" : "hidden"} message`}>
-            Plaese enter correct color
-          </p>
-        </header>
-        <ColorContainr
-          colorsList={this.state.colorsList}
+        <Header
+          submitHandler={this.submitHandler}
+          changeHandler={this.changeHandler}
+          error={this.state.error}
           color={this.state.color}
         />
+        <ColorContainr colorsList={this.state.colorsList} />
       </div>
     );
   }

@@ -7,10 +7,15 @@
   outline: none;
   padding: 1rem 1.75rem;
   width: 70%;
-  border-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   font-size: 2rem;
   font-weight: 500;
   color: inherit;
+}
+
+.form-input::placeholder {
+  color: var(--clr-grey-8);
 }
 
 .form-btn {
@@ -21,7 +26,8 @@
   color: #fff;
   font-size: 2rem;
   padding: 1rem 1.75rem;
-  border-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
 
 .error {

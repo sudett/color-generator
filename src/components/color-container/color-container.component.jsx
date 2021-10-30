@@ -4,19 +4,12 @@ import ColorItem from "../color-item/color-item.component";
 
 import "./color-container.styles.css";
 
-const ColorContainer = ({ colorsList, color }) => {
+const ColorContainer = ({ colorsList }) => {
   return (
     <div className="color-container">
-      <ColorItem color={color} />
-      <ColorItem color={color} />
-      <ColorItem color={color} />
-      <ColorItem color={color} />
-      <ColorItem color={color} />
-      <ColorItem color={color} />
-      <ColorItem color={color} />
-      <ColorItem color={color} />
-      <ColorItem color={color} />
-      <ColorItem color={color} />
+      {colorsList.map((color, index) => (
+        <ColorItem key={index} {...color} hex={color.hex} />
+      ))}
     </div>
   );
 };
