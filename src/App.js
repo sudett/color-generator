@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Form from "./components/form/form.component";
+import "./App.css";
+import ColorContainr from "./components/color-container/color-container.component";
+
+export default class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      color: "f15025",
+      error: false,
+      colorsList: [],
+    };
+  }
+
+  submitHandler = (e) => {
+    e.preventDefault();
+    this.setState({ color: e.target.querySelector("input").value }, () =>
+      console.log(this.state.color)
+    );
+  };
+
+  changeHandler = (e) => {
+    this.setState({ color: e.target.value });
+  };
+
+  render() {
+    return (
+      <div>
+        <header className="header">
+          <h1 className="heading-primary">Color generator</h1>
+          <Form
+            submitHandler={this.submitHandler}
+            color={this.state.color}
+            changeHandler={this.changeHandler}
+          />
+          <p className={`${this.state.error ? "" : "hidden"} message`}>
+            Plaese enter correct color
+          </p>
+        </header>
+        <ColorContainr
+          colorsList={this.state.colorsList}
+          color={this.state.color}
+        />
+      </div>
+    );
+  }
 }
-
-export default App;

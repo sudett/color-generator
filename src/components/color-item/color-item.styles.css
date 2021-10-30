@@ -1,0 +1,7 @@
+.color-item {
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+  padding: 2rem 3rem;
+  background-color: var(--clr-red-light);
+}
