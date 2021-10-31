@@ -1,11 +1,22 @@
 .color-item {
   display: flex;
   flex-direction: column;
-  height: 15vh;
+  height: 18vh;
   padding: 2rem 3rem;
   cursor: pointer;
 }
 
 .white-text {
   color: #fff;
+}
+
+.clipboard {
+  color: var(--clr-grey-7);
+  margin-top: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.hidden {
+  display: none;
 }

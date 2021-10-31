@@ -14,7 +14,7 @@ export default class App extends React.Component {
     this.state = {
       color: "",
       error: false,
-      colorsList: [],
+      colorsList: new Values("#8f5d90").all(10),
     };
   }
 
@@ -33,11 +33,6 @@ export default class App extends React.Component {
   changeHandler = (e) => {
     this.setState({ color: e.target.value });
   };
-
-  componentDidMount() {
-    const color = new Values("#8f5d90");
-    this.setState({ colorsList: color.all(10) });
-  }
 
   render() {
     return (
