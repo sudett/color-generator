@@ -1,3 +1,5 @@
+In this project i've learned working with a new library, Values.js. User type a color and get different tints and shades of that color. I also learned how to copy a text to clipboard.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
