@@ -14,7 +14,7 @@ const Header = ({ submitHandler, changeHandler, error, color }) => {
         color={color}
         error={error}
       />
-      <p className={`${error ? "" : "hidden"} message`}>
+      <p className={`${error ? "" : "hidden-message"} message`}>
         Plaese enter correct color
       </p>
     </header>

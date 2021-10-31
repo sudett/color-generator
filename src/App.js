@@ -22,6 +22,7 @@ export default class App extends React.Component {
     e.preventDefault();
 
     try {
+      this.setState({ error: false });
       const colorsList = new Values(this.state.color).all(10);
       this.setState({ colorsList }, () => console.log(this.state.colorsList));
     } catch (err) {
