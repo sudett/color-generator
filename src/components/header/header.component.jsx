@@ -2,22 +2,20 @@ import React from "react";
 
 import Form from "../form/form.component";
 
-import "./header.styles.css";
+import { HeaderContainer, HeadingPrimary, Message } from "./header.styles";
 
 const Header = ({ submitHandler, changeHandler, error, color }) => {
   return (
-    <header className="header">
-      <h1 className="heading-primary">Color generator</h1>
+    <HeaderContainer>
+      <HeadingPrimary>Color generator</HeadingPrimary>
       <Form
         submitHandler={submitHandler}
         changeHandler={changeHandler}
         color={color}
         error={error}
       />
-      <p className={`${error ? "" : "hidden-message"} message`}>
-        Plaese enter correct color
-      </p>
-    </header>
+      <Message error={error}>Plaese enter correct color</Message>
+    </HeaderContainer>
   );
 };
 

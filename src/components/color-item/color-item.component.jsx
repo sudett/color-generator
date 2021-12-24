@@ -1,43 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import "./color-item.styles.css";
+import { ColorItemContainer, ClipBoard } from "./color-item.styles";
 
-export default class ColorItem extends React.Component {
-  constructor(props) {
-    super(props);
+const ColorItem = ({ hex, weight, type, rgb }) => {
+  const [clipboard, setClipboard] = useState(false);
 
-    this.state = {
-      clipboard: false,
-    };
-  }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setClipboard(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [clipboard]);
 
-  clickHandler = () => {
-    navigator.clipboard.writeText(`#${this.props.hex}`);
-
-    this.setState({ clipboard: true }, () => {
-      const timer = setTimeout(() => {
-        this.setState({ clipboard: false });
-      }, 3000);
-      return () => clearTimeout(timer);
-    });
+  const clipboardHandler = () => {
+    setClipboard(true);
+    navigator.clipboard.writeText(`#${hex}`);
   };
 
-  render() {
-    const { hex, weight, type, rgb } = this.props;
-    const color = rgb.join(",");
+  const color = rgb.join(",");
 
-    return (
-      <div
-        className={`${type === "shade" ? "white-text" : ""} color-item`}
-        style={{ backgroundColor: `rgb(${color})` }}
-        onClick={this.clickHandler}
-      >
-        <span>{weight}%</span>
-        <span>#{hex}</span>
-        <p className={`${this.state.clipboard ? "" : "hidden"} clipboard`}>
-          Copied to clipboard
-        </p>
-      </div>
-    );
-  }
-}
+  return (
+    <ColorItemContainer type={type} color={color} onClick={clipboardHandler}>
+      <span>{weight}%</span>
+      <span>#{hex}</span>
+      <ClipBoard clipboard={clipboard}>Copied to clipboard</ClipBoard>
+    </ColorItemContainer>
+  );
+};
+
+export default ColorItem;

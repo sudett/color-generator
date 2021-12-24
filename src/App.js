@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import Values from "values.js";
 
@@ -7,45 +7,44 @@ import ColorContainr from "./components/color-container/color-container.componen
 
 import "./App.css";
 
-export default class App extends React.Component {
-  constructor() {
-    super();
+const App = () => {
+  const [color, setColor] = useState("");
+  const [error, setError] = useState(false);
+  const [colorsList, setColorsList] = useState(new Values("#8f5d90").all(10));
 
-    this.state = {
-      color: "",
-      error: false,
-      colorsList: new Values("#8f5d90").all(10),
-    };
-  }
+  useEffect(() => {
+    setError(false);
+  }, []);
 
-  submitHandler = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
 
     try {
-      this.setState({ error: false });
-      const colorsList = new Values(this.state.color).all(10);
-      this.setState({ colorsList }, () => console.log(this.state.colorsList));
+      setError(false);
+      const colorsList = new Values(color).all(10);
+      setColorsList(colorsList);
+      console.log(colorsList);
     } catch (err) {
-      this.setState({ error: true });
+      setError(true);
       console.log(err);
     }
   };
 
-  changeHandler = (e) => {
-    this.setState({ color: e.target.value });
+  const changeHandler = (e) => {
+    setColor(e.target.value);
   };
 
-  render() {
-    return (
-      <div>
-        <Header
-          submitHandler={this.submitHandler}
-          changeHandler={this.changeHandler}
-          error={this.state.error}
-          color={this.state.color}
-        />
-        <ColorContainr colorsList={this.state.colorsList} />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Header
+        submitHandler={submitHandler}
+        changeHandler={changeHandler}
+        error={error}
+        color={color}
+      />
+      <ColorContainr colorsList={colorsList} />
+    </div>
+  );
+};
+
+export default App;

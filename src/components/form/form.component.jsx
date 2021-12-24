@@ -1,20 +1,18 @@
 import React from "react";
 
-import "./form.styles.css";
+import { FormContainer, FormInput, FormButton } from "./form.styles";
 
 const Form = ({ submitHandler, color, changeHandler, error }) => (
-  <form className="form" onSubmit={submitHandler}>
-    <input
-      className={`${error ? "error" : ""} form-input`}
+  <FormContainer onSubmit={submitHandler}>
+    <FormInput
+      error={error}
       type="text"
       value={color}
       onChange={changeHandler}
       placeholder="#8f5d90"
-    ></input>
-    <button className="form-btn" type="submit">
-      Submit
-    </button>
-  </form>
+    ></FormInput>
+    <FormButton type="submit">Submit</FormButton>
+  </FormContainer>
 );
 
 export default Form;

@@ -2,15 +2,15 @@ import React from "react";
 
 import ColorItem from "../color-item/color-item.component";
 
-import "./color-container.styles.css";
+import { ColorContainerStyles } from "./color-container.styles";
 
 const ColorContainer = ({ colorsList }) => {
   return (
-    <div className="color-container">
+    <ColorContainerStyles>
       {colorsList.map((color, index) => (
         <ColorItem key={index} {...color} hex={color.hex} />
       ))}
-    </div>
+    </ColorContainerStyles>
   );
 };
 
